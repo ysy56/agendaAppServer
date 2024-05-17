@@ -5,7 +5,11 @@ import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AgendaService {
@@ -30,6 +34,16 @@ public class AgendaService {
     }
 
     public AgendaResponseDto getAgenda(Long id) {
+        // DB 조회
         return agendaRepository.findById(id).map(AgendaResponseDto::new).orElse(null);
+    }
+
+    public List<AgendaResponseDto> getAllAgendas(String sort, String order) {
+        // DB 조회
+        Sort.Direction direction = order.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sortBy = Sort.by(direction, sort);
+
+        List<Agenda> agendas = agendaRepository.findAll(sortBy);
+        return agendas.stream().map(AgendaResponseDto::new).collect(Collectors.toList());
     }
 }
