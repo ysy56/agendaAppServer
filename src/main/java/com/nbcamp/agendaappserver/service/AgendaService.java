@@ -28,4 +28,8 @@ public class AgendaService {
 
         return agendaResponseDto;
     }
+
+    public AgendaResponseDto getAgenda(Long id) {
+        return agendaRepository.findById(id).map(AgendaResponseDto::new).orElse(null);
+    }
 }

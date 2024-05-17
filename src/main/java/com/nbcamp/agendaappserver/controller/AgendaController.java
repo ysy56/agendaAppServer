@@ -5,10 +5,7 @@ import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.service.AgendaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -23,5 +20,10 @@ public class AgendaController {
     @PostMapping("/agenda")
     public AgendaResponseDto createAgenda(@RequestBody AgendaRequestDto requestDto) {
         return agendaService.createAgenda(requestDto);
+    }
+
+    @GetMapping("/agenda/{id}")
+    public AgendaResponseDto getAgenda(@PathVariable Long id) {
+        return agendaService.getAgenda(id);
     }
 }

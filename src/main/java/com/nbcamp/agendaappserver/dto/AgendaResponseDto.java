@@ -4,7 +4,7 @@ import com.nbcamp.agendaappserver.entity.Agenda;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Getter
 public class AgendaResponseDto {
