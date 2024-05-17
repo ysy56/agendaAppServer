@@ -2,7 +2,6 @@ package com.nbcamp.agendaappserver.controller;
 
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
 import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
-import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.service.AgendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
