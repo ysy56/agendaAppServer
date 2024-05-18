@@ -39,4 +39,10 @@ public class Agenda{
         this.manager = requestDto.getManager();
         this.psword = requestDto.getPsword();
     }
+
+    public void update(AgendaRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.manager = requestDto.getManager();
+    }
 }

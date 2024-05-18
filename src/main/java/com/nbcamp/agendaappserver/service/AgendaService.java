@@ -7,8 +7,10 @@ import com.nbcamp.agendaappserver.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,5 +47,30 @@ public class AgendaService {
 
         List<Agenda> agendas = agendaRepository.findAll(sortBy);
         return agendas.stream().map(AgendaResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public AgendaResponseDto updateAgenda(Long id, AgendaRequestDto requestDto) {
+        // 해당 일정이 DB에 존재하는지 확인
+        Agenda agenda = findAgenda(id);
+
+        if (agenda.getPsword() != null
+                && !Objects.equals(agenda.getPsword(), requestDto.getPsword())) {
+            throw new IllegalArgumentException("password mismatch");
+        }
+
+        // agenda 내용 수정
+        agenda.update(requestDto);
+
+        // Entity -> ResponseDto
+        AgendaResponseDto agendaResponseDto = new AgendaResponseDto(agenda);
+
+        return agendaResponseDto;
+    }
+
+    private Agenda findAgenda(Long id) {
+        return agendaRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Agenda not found")
+        );
     }
 }

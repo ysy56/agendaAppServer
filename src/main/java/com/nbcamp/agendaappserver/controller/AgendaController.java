@@ -33,4 +33,9 @@ public class AgendaController {
                                                  @RequestParam(value = "order", required = false, defaultValue = "desc") String order) {
         return agendaService.getAllAgendas(sort, order);
     }
+
+    @PutMapping("/agenda/{id}")
+    public AgendaResponseDto updateAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
+        return agendaService.updateAgenda(id, requestDto);
+    }
 }
