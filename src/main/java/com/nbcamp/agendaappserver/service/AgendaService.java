@@ -68,6 +68,21 @@ public class AgendaService {
         return agendaResponseDto;
     }
 
+    public Long deleteAgenda(Long id, AgendaRequestDto requestDto) {
+        // 해당 일정이 DB에 존재하는지 확인
+        Agenda agenda = findAgenda(id);
+
+        if (agenda.getPsword() != null
+                && !Objects.equals(agenda.getPsword(), requestDto.getPsword())) {
+            throw new IllegalArgumentException("password mismatch");
+        }
+
+        // Agenda 삭제
+        agendaRepository.delete(agenda);
+
+        return id;
+    }
+
     private Agenda findAgenda(Long id) {
         return agendaRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Agenda not found")

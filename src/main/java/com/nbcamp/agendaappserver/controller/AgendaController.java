@@ -38,4 +38,9 @@ public class AgendaController {
     public AgendaResponseDto updateAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
         return agendaService.updateAgenda(id, requestDto);
     }
+
+    @DeleteMapping("/agenda/{id}")
+    public Long deleteAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
+        return agendaService.deleteAgenda(id, requestDto);
+    }
 }
