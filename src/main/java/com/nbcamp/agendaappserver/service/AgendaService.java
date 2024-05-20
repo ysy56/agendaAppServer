@@ -35,9 +35,9 @@ public class AgendaService {
         return agendaRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<AgendaResponseDto> getAgendas() {
+    public List<Agenda> getAgendas() {
         // DB 조회
-        return agendaRepository.findAllByOrderByCreatedAtDesc().stream().map(AgendaResponseDto::new).toList();
+        return agendaRepository.findAll(Sort.by("createdAt").descending());
     }
 
     @Transactional

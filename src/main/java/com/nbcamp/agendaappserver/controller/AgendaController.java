@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -47,8 +49,17 @@ public class AgendaController {
     }
 
     @GetMapping("/agendas")
-    public List<AgendaResponseDto> getAgendas() {
-        return agendaService.getAgendas();
+    public ResponseEntity<CommonResponse<List<AgendaResponseDto>>> getAgendas() {
+        List<Agenda> agendas = agendaService.getAgendas();
+        List<AgendaResponseDto> response = agendas.stream()
+                .map(AgendaResponseDto::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok()
+                .body(CommonResponse.<List<AgendaResponseDto>>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("목록 조회가 완료 되었습니다.")
+                        .data(response)
+                        .build());
     }
 
     @PutMapping("/agenda/{id}")
