@@ -2,9 +2,12 @@ package com.nbcamp.agendaappserver.entity;
 
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,11 +23,16 @@ public class Agenda{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Setter
     @Column(name = "title", nullable = false)
+    @Size(max = 200, message = "제목은 200자 이내로 작성해주세요.")
     private String title;
-    @Column(name = "content", nullable = false)
+    @Setter
+    @Column(name = "content")
     private String content;
-    @Column(name = "manager", nullable = false)
+    @Setter
+    @Column(name = "manager")
+    @Email(message = "이메일 형식으로 입력해주세요.")
     private String manager;
     @Column(name = "psword", nullable = false)
     private String psword;
@@ -48,15 +56,4 @@ public class Agenda{
         this.manager = requestDto.getManager();
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setManager(String manager) {
-        this.manager = manager;
-    }
 }
