@@ -32,7 +32,8 @@ public class AgendaService {
 
     public Agenda getAgenda(Long id) {
         // DB 조회
-        return agendaRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return agendaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정은 존재하지 않습니다."));
     }
 
     public List<Agenda> getAgendas() {
@@ -66,8 +67,9 @@ public class AgendaService {
         // 비밀번호 체크
         if (agenda.getPsword() != null
             && !Objects.equals(agenda.getPsword(), psword)) {
-            throw new IllegalArgumentException("password mismatch");
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
+
         return agenda;
     }
 }
