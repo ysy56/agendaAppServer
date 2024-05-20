@@ -29,9 +29,8 @@ public class AgendaController {
     }
 
     @GetMapping("/agendas")
-    public List<AgendaResponseDto> getAllAgendas(@RequestParam(value = "sort", required = false, defaultValue = "createdAt") String sort,
-                                                 @RequestParam(value = "order", required = false, defaultValue = "desc") String order) {
-        return agendaService.getAllAgendas(sort, order);
+    public List<AgendaResponseDto> getAgendas() {
+        return agendaService.getAgendas();
     }
 
     @PutMapping("/agenda/{id}")

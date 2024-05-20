@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class AgendaService {
     private AgendaRepository agendaRepository;
@@ -40,13 +42,9 @@ public class AgendaService {
         return agendaRepository.findById(id).map(AgendaResponseDto::new).orElse(null);
     }
 
-    public List<AgendaResponseDto> getAllAgendas(String sort, String order) {
+    public List<AgendaResponseDto> getAgendas() {
         // DB 조회
-        Sort.Direction direction = order.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Sort sortBy = Sort.by(direction, sort);
-
-        List<Agenda> agendas = agendaRepository.findAll(sortBy);
-        return agendas.stream().map(AgendaResponseDto::new).collect(Collectors.toList());
+        return agendaRepository.findAllByOrderByCreatedAtDesc().stream().map(AgendaResponseDto::new).toList();
     }
 
     @Transactional
