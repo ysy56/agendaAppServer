@@ -24,17 +24,10 @@ public class AgendaService {
         this.agendaRepository = agendaRepository;
     }
 
-    public AgendaResponseDto createAgenda(AgendaRequestDto requestDto) {
+    public Agenda createAgenda(AgendaRequestDto requestDto) {
         // RequestDto -> Entity
-        Agenda agenda = new Agenda(requestDto);
-
-        // DB 저장
-        Agenda savedAgenda = agendaRepository.save(agenda);
-
-        // Entity -> ResponseDto
-        AgendaResponseDto agendaResponseDto = new AgendaResponseDto(savedAgenda);
-
-        return agendaResponseDto;
+        Agenda agenda = requestDto.toEntity();
+        return agendaRepository.save(agenda);
     }
 
     public AgendaResponseDto getAgenda(Long id) {

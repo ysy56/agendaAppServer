@@ -1,9 +1,13 @@
 package com.nbcamp.agendaappserver.controller;
 
+import com.nbcamp.agendaappserver.CommonResponse;
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
 import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
+import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.service.AgendaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +23,15 @@ public class AgendaController {
     }
 
     @PostMapping("/agenda")
-    public AgendaResponseDto createAgenda(@RequestBody AgendaRequestDto requestDto) {
-        return agendaService.createAgenda(requestDto);
+    public ResponseEntity<CommonResponse<AgendaResponseDto>> createAgenda(@RequestBody AgendaRequestDto requestDto) {
+        Agenda agenda = agendaService.createAgenda(requestDto);
+        AgendaResponseDto response = new AgendaResponseDto(agenda);
+        return ResponseEntity.ok()
+                .body(CommonResponse.<AgendaResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("생성이 완료 되었습니다.")
+                        .data(response)
+                        .build());
     }
 
     @GetMapping("/agenda/{id}")

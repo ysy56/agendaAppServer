@@ -2,6 +2,7 @@ package com.nbcamp.agendaappserver.entity;
 
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,11 +34,12 @@ public class Agenda{
     @Temporal(TemporalType.DATE)
     private LocalDate createdAt;
 
-    public Agenda(AgendaRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.content = requestDto.getContent();
-        this.manager = requestDto.getManager();
-        this.psword = requestDto.getPsword();
+    @Builder
+    public Agenda(String title, String content, String manager, String psword) {
+        this.title = title;
+        this.content = content;
+        this.manager = manager;
+        this.psword = psword;
     }
 
     public void update(AgendaRequestDto requestDto) {
