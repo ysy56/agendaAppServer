@@ -47,4 +47,16 @@ public class Agenda{
         this.content = requestDto.getContent();
         this.manager = requestDto.getManager();
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
 }

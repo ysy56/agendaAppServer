@@ -63,12 +63,24 @@ public class AgendaController {
     }
 
     @PutMapping("/agenda/{id}")
-    public AgendaResponseDto updateAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
-        return agendaService.updateAgenda(id, requestDto);
+    public ResponseEntity<CommonResponse<AgendaResponseDto>> updateAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
+        Agenda agenda = agendaService.updateAgenda(id, requestDto);
+        AgendaResponseDto response = new AgendaResponseDto(agenda);
+        return ResponseEntity.ok()
+                .body(CommonResponse.<AgendaResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("수정이 완료 되었습니다.")
+                        .data(response)
+                        .build());
     }
 
     @DeleteMapping("/agenda/{id}")
-    public Long deleteAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
-        return agendaService.deleteAgenda(id, requestDto);
+    public ResponseEntity<CommonResponse> deleteAgenda(@PathVariable Long id, @RequestBody AgendaRequestDto requestDto) {
+        agendaService.deleteAgenda(id, requestDto);
+        return ResponseEntity.ok()
+                .body(CommonResponse.builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("삭제가 완료 되었습니다.")
+                        .build());
     }
 }

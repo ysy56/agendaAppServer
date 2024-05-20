@@ -41,42 +41,33 @@ public class AgendaService {
     }
 
     @Transactional
-    public AgendaResponseDto updateAgenda(Long id, AgendaRequestDto requestDto) {
+    public Agenda updateAgenda(Long id, AgendaRequestDto requestDto) {
         // 해당 일정이 DB에 존재하는지 확인
-        Agenda agenda = findAgenda(id);
+        Agenda agenda = checkPWAndGetAgenda(id, requestDto.getPsword());
 
-        if (agenda.getPsword() != null
-                && !Objects.equals(agenda.getPsword(), requestDto.getPsword())) {
-            throw new IllegalArgumentException("password mismatch");
-        }
+        agenda.setTitle(requestDto.getTitle());
+        agenda.setContent(requestDto.getContent());
+        agenda.setManager(requestDto.getManager());
 
-        // agenda 내용 수정
-        agenda.update(requestDto);
-
-        // Entity -> ResponseDto
-        AgendaResponseDto agendaResponseDto = new AgendaResponseDto(agenda);
-
-        return agendaResponseDto;
+        return agendaRepository.save(agenda);
     }
 
-    public Long deleteAgenda(Long id, AgendaRequestDto requestDto) {
+    public void deleteAgenda(Long id, AgendaRequestDto requestDto) {
         // 해당 일정이 DB에 존재하는지 확인
-        Agenda agenda = findAgenda(id);
-
-        if (agenda.getPsword() != null
-                && !Objects.equals(agenda.getPsword(), requestDto.getPsword())) {
-            throw new IllegalArgumentException("password mismatch");
-        }
+        Agenda agenda = checkPWAndGetAgenda(id, requestDto.getPsword());
 
         // Agenda 삭제
         agendaRepository.delete(agenda);
-
-        return id;
     }
 
-    private Agenda findAgenda(Long id) {
-        return agendaRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("Agenda not found")
-        );
+    public Agenda checkPWAndGetAgenda(Long id, String psword) {
+        Agenda agenda = getAgenda(id);
+
+        // 비밀번호 체크
+        if (agenda.getPsword() != null
+            && !Objects.equals(agenda.getPsword(), psword)) {
+            throw new IllegalArgumentException("password mismatch");
+        }
+        return agenda;
     }
 }
