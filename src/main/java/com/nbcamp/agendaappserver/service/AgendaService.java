@@ -30,9 +30,9 @@ public class AgendaService {
         return agendaRepository.save(agenda);
     }
 
-    public AgendaResponseDto getAgenda(Long id) {
+    public Agenda getAgenda(Long id) {
         // DB 조회
-        return agendaRepository.findById(id).map(AgendaResponseDto::new).orElse(null);
+        return agendaRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     public List<AgendaResponseDto> getAgendas() {

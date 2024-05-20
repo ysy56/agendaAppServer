@@ -35,8 +35,15 @@ public class AgendaController {
     }
 
     @GetMapping("/agenda/{id}")
-    public AgendaResponseDto getAgenda(@PathVariable Long id) {
-        return agendaService.getAgenda(id);
+    public ResponseEntity<CommonResponse<AgendaResponseDto>> getAgenda(@PathVariable Long id) {
+        Agenda agenda = agendaService.getAgenda(id);
+        AgendaResponseDto response = new AgendaResponseDto(agenda);
+        return ResponseEntity.ok()
+                .body(CommonResponse.<AgendaResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("단건 조회가 완료 되었습니다.")
+                        .data(response)
+                        .build());
     }
 
     @GetMapping("/agendas")
