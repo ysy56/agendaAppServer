@@ -1,5 +1,6 @@
 package com.nbcamp.agendaappserver.entity;
 
+import com.nbcamp.agendaappserver.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,5 +38,9 @@ public class Comment {
         this.content = content;
         this.manager = manager;
         this.agenda = agenda;
+    }
+
+    public void update(CommentRequestDto requestDto) {
+        this.content = requestDto.getContent();
     }
 }

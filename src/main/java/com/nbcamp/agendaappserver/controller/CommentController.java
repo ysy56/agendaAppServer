@@ -39,4 +39,20 @@ public class CommentController {
                         .data(response)
                         .build());
     }
+
+    @GetMapping("/agenda/{agendaId}/comment/{commentId}")
+    public ResponseEntity<CommonResponse<CommentResponseDto>> updateComment(
+            @PathVariable Long agendaId,
+            @PathVariable Long commentId,
+            @RequestBody CommentRequestDto requestDto) {
+        Agenda agenda = agendaService.getAgenda(agendaId);
+        Comment comment = commentService.updateComment(commentId, requestDto);
+        CommentResponseDto response = new CommentResponseDto(comment);
+        return ResponseEntity.ok()
+                .body(CommonResponse.<CommentResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("수정이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
 }
