@@ -46,7 +46,7 @@ public class AgendaService {
         // 해당 일정이 DB에 존재하는지 확인
         Agenda agenda = checkPWAndGetAgenda(id, requestDto.getPsword());
 
-        Agenda updatedAgenda = agenda.update(requestDto);
+        agenda.update(requestDto);
 
         return agendaRepository.save(agenda);
     }

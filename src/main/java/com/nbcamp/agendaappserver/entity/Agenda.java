@@ -46,13 +46,10 @@ public class Agenda{
         this.psword = psword;
     }
 
-    public Agenda update(AgendaRequestDto requestDto) {
-        return new Agenda(
-                requestDto.getTitle(),
-                requestDto.getContent(),
-                requestDto.getManager(),
-                this.psword
-        );
+    public void update(AgendaRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.manager = requestDto.getManager();
     }
 
 }
