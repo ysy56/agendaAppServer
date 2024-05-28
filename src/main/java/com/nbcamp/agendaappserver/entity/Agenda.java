@@ -12,7 +12,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity // JPA가 관리할 수 있는 Entity 클래스 지정
 @Getter
@@ -23,14 +22,11 @@ public class Agenda{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Setter
     @Column(name = "title", nullable = false)
     @Size(max = 200, message = "제목은 200자 이내로 작성해주세요.")
     private String title;
-    @Setter
     @Column(name = "content")
     private String content;
-    @Setter
     @Column(name = "manager")
     @Email(message = "이메일 형식으로 입력해주세요.")
     private String manager;
@@ -50,10 +46,13 @@ public class Agenda{
         this.psword = psword;
     }
 
-    public void update(AgendaRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.content = requestDto.getContent();
-        this.manager = requestDto.getManager();
+    public Agenda update(AgendaRequestDto requestDto) {
+        return new Agenda(
+                requestDto.getTitle(),
+                requestDto.getContent(),
+                requestDto.getManager(),
+                this.psword
+        );
     }
 
 }
