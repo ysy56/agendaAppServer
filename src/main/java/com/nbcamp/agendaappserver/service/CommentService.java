@@ -44,15 +44,24 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    public void deleteComment(Long commentId, CommentRequestDto requestDto) {
+        // 해당 일정이 DB에 존재하는지 확인
+        Comment comment = checkManagerAndGetComment(commentId, requestDto.getManager());
+
+        // Agenda 삭제
+        commentRepository.delete(comment);
+    }
+
     public Comment checkManagerAndGetComment(Long commentId, String manager) {
         Comment comment = getComment(commentId);
 
         // 작성자 체크
-        if (manager != null
+        if (comment.getManager() != null
                 && !Objects.equals(manager, comment.getManager())) {
             throw new IllegalArgumentException("댓글 작성자(담당자)가 일치하지 않습니다.");
         }
 
         return comment;
     }
+
 }

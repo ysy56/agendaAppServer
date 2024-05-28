@@ -44,7 +44,8 @@ public class CommentController {
     public ResponseEntity<CommonResponse<CommentResponseDto>> updateComment(
             @PathVariable Long agendaId,
             @PathVariable Long commentId,
-            @RequestBody CommentRequestDto requestDto) {
+            @RequestBody CommentRequestDto requestDto)
+    {
         Agenda agenda = agendaService.getAgenda(agendaId);
         Comment comment = commentService.updateComment(commentId, requestDto);
         CommentResponseDto response = new CommentResponseDto(comment);
@@ -53,6 +54,21 @@ public class CommentController {
                         .statusCode(HttpStatus.OK.value())
                         .msg("수정이 완료 되었습니다.")
                         .data(response)
+                        .build());
+    }
+
+    @DeleteMapping("/agenda/{agendaId}/comment/{commentId}")
+    public ResponseEntity<CommonResponse> deleteComment(
+            @PathVariable Long agendaId,
+            @PathVariable Long commentId,
+            @RequestBody CommentRequestDto requestDto)
+    {
+        Agenda agenda = agendaService.getAgenda(agendaId);
+        commentService.deleteComment(commentId, requestDto);
+        return ResponseEntity.ok()
+                .body(CommonResponse.builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("삭제가 완료 되었습니다.")
                         .build());
     }
 }
