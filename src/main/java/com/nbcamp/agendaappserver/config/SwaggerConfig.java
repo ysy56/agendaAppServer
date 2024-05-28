@@ -1,4 +1,4 @@
-package com.nbcamp.agendaappserver;
+package com.nbcamp.agendaappserver.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
