@@ -1,15 +1,12 @@
 package com.nbcamp.agendaappserver.controller;
 
 import com.nbcamp.agendaappserver.CommonResponse;
-import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
-import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
 import com.nbcamp.agendaappserver.dto.CommentRequestDto;
 import com.nbcamp.agendaappserver.dto.CommentResponseDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.entity.Comment;
 import com.nbcamp.agendaappserver.service.AgendaService;
 import com.nbcamp.agendaappserver.service.CommentService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

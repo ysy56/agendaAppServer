@@ -1,7 +1,6 @@
 package com.nbcamp.agendaappserver.service;
 
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
-import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class AgendaService {
