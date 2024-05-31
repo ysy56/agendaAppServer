@@ -1,6 +1,5 @@
 package com.nbcamp.agendaappserver.security;
 
-import com.nbcamp.agendaappserver.security.UserDetailsImpl;
 import com.nbcamp.agendaappserver.entity.User;
 import com.nbcamp.agendaappserver.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
