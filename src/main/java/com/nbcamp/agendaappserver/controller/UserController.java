@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/signup")
-    public ResponseEntity<CommonResponse<SignupResponseDto>> signup(@RequestBody @Valid SignupRequestDto requestDto, BindingResult bindingResult) {
+    public ResponseEntity<CommonResponse<SignupResponseDto>> signup(@Valid @RequestBody SignupRequestDto requestDto) {
         User user = userService.signup(requestDto);
         SignupResponseDto response = new SignupResponseDto(user);
         return ResponseEntity.ok()

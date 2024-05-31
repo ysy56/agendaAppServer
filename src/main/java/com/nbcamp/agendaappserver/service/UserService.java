@@ -15,7 +15,6 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
@@ -23,7 +22,7 @@ public class UserService {
     public User signup(SignupRequestDto requestDto) {
         String nickname = requestDto.getNickname();
         String username = requestDto.getUsername();
-        String password = passwordEncoder.encode(requestDto.getPassword());
+        String password = requestDto.getPassword();
 
         // 회원 중복 확인
         Optional<User> checkUsername = userRepository.findByUsername(username);
