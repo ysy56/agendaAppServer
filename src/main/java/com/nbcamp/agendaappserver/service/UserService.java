@@ -1,5 +1,6 @@
 package com.nbcamp.agendaappserver.service;
 
+import com.nbcamp.agendaappserver.dto.LoginRequestDto;
 import com.nbcamp.agendaappserver.dto.SignupRequestDto;
 import com.nbcamp.agendaappserver.entity.User;
 import com.nbcamp.agendaappserver.entity.UserRoleEnum;
@@ -44,5 +45,21 @@ public class UserService {
 
 
         return userRepository.save(user);
+    }
+
+    public void login(LoginRequestDto requestDto) {
+        String username = requestDto.getUsername();
+        String password = requestDto.getPassword();
+
+        // 회원 존재 확인
+        Optional<User> checkUser = userRepository.findByUsername(username);
+        if (checkUser.isPresent()) {
+            User user = checkUser.get();
+            if (!user.getPassword().equals(password)) {
+                throw new IllegalArgumentException("비밀번호가 틀렸습니다.");
+            }
+        } else {
+            throw new IllegalArgumentException("등록된 사용자가 없습니다.");
+        }
     }
 }
