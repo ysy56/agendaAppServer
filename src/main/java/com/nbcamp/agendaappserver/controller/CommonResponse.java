@@ -1,4 +1,4 @@
-package com.nbcamp.agendaappserver;
+package com.nbcamp.agendaappserver.controller;
 
 import lombok.Builder;
 import lombok.Getter;
