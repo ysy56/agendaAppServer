@@ -1,6 +1,5 @@
 package com.nbcamp.agendaappserver.controller;
 
-import com.nbcamp.agendaappserver.CommonResponse;
 import com.nbcamp.agendaappserver.dto.CommentRequestDto;
 import com.nbcamp.agendaappserver.dto.CommentResponseDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
