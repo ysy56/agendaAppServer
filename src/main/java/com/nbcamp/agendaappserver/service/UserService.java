@@ -5,7 +5,7 @@ import com.nbcamp.agendaappserver.dto.SignupRequestDto;
 import com.nbcamp.agendaappserver.entity.User;
 import com.nbcamp.agendaappserver.entity.UserRoleEnum;
 import com.nbcamp.agendaappserver.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,12 +15,14 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // ADMIN_TOKEN
+    @Value("${admin.token}")
+    private String ADMIN_TOKEN;
+
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    // ADMIN_TOKEN
-    private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
     public User signup(SignupRequestDto requestDto) {
         String nickname = requestDto.getNickname();
