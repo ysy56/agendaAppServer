@@ -1,6 +1,5 @@
 package com.nbcamp.agendaappserver.controller;
 
-import com.nbcamp.agendaappserver.CommonResponse;
 import com.nbcamp.agendaappserver.dto.LoginRequestDto;
 import com.nbcamp.agendaappserver.dto.SignupRequestDto;
 import com.nbcamp.agendaappserver.dto.SignupResponseDto;

@@ -1,6 +1,5 @@
 package com.nbcamp.agendaappserver.controller;
 
-import com.nbcamp.agendaappserver.CommonResponse;
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
 import com.nbcamp.agendaappserver.dto.AgendaResponseDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
@@ -17,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
