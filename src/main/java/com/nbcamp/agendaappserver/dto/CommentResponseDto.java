@@ -1,12 +1,14 @@
 package com.nbcamp.agendaappserver.dto;
 
 import com.nbcamp.agendaappserver.entity.Comment;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
 public class CommentResponseDto {
+    @NotEmpty
     private Long id;
     private String content;
     private String manager;

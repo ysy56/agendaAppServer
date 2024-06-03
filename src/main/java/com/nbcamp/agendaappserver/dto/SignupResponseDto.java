@@ -2,8 +2,9 @@ package com.nbcamp.agendaappserver.dto;
 
 import com.nbcamp.agendaappserver.entity.User;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class SignupResponseDto {
     private Long id;
     private String nickname;
