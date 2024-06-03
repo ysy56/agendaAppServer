@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 public class AgendaController {
     private final AgendaService agendaService;
 
-    @Autowired
     public AgendaController(AgendaService agendaService) {
         this.agendaService = agendaService;
     }

@@ -4,7 +4,7 @@ import com.nbcamp.agendaappserver.dto.CommentRequestDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.entity.Comment;
 import com.nbcamp.agendaappserver.repository.CommentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +14,6 @@ import java.util.Objects;
 public class CommentService {
     private CommentRepository commentRepository;
 
-    @Autowired
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }

@@ -17,7 +17,6 @@ public class CommentController {
     private final CommentService commentService;
     private final AgendaService agendaService;
 
-    @Autowired
     public CommentController(CommentService commentService, AgendaService agendaService) {
         this.commentService = commentService;
         this.agendaService = agendaService;

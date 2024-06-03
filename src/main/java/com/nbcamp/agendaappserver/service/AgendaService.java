@@ -3,7 +3,7 @@ package com.nbcamp.agendaappserver.service;
 import com.nbcamp.agendaappserver.dto.AgendaRequestDto;
 import com.nbcamp.agendaappserver.entity.Agenda;
 import com.nbcamp.agendaappserver.repository.AgendaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,6 @@ import java.util.Objects;
 public class AgendaService {
     private AgendaRepository agendaRepository;
 
-    @Autowired
     public AgendaService(AgendaRepository agendaRepository) {
         this.agendaRepository = agendaRepository;
     }
